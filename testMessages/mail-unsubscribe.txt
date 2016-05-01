@@ -1,0 +1,30 @@
+From 2567100172@vzwpix.com Sun Apr 06 01:48:19 2014
+Received: from txslspamp2.vtext.com ([69.78.67.195]:28269)
+	by server.tshows.us with esmtp (Exim 4.82)
+	(envelope-from <2567100172@vzwpix.com>)
+	id 1WWYRn-000494-L2
+	for text@t4c.tshows.us; Sun, 06 Apr 2014 01:48:19 +0400
+Received: from 39.sub-69-78-81.myvzw.com (HELO m01.vzwpix.com) ([69.78.81.39])
+  by txslspamp2.vtext.com with SMTP; 05 Apr 2014 21:48:20 +0000
+From:2567100172@vzwpix.com
+To:text@t4c.tshows.us
+Subject:
+Message-ID: <212263494500532595@-212263494500532596>
+Date: Sat, 5 Apr 2014 21:48:20 +0000
+MIME-Version:1.0
+Content-Type: multipart/mixed;
+ type="application/smil";
+ boundary="__CONTENT_64564_PART_BOUNDARY__33243242__"
+
+--__CONTENT_64564_PART_BOUNDARY__33243242__
+Content-Type: text/plain;
+ charset=us-ascii
+Content-ID: <0>
+Content-Disposition: attachment;
+ filename="text_0.txt"
+Content-Location: text_0.txt
+
+Stop
+--__CONTENT_64564_PART_BOUNDARY__33243242__--
+
+

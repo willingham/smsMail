@@ -1,0 +1,8 @@
+MESSAGE PARTS:
+multipart/mixed
+text/plain
+
+MESSAGE CONTENT:
+SubscribeFalse
+FROM ADDRESS:
+2567100172@vzwpix.com
