@@ -1,16 +1,24 @@
+import email
+
 class mailParser(object):
     def __init__(self, rawMime):
         self._mime = email.message_from_string(rawMime)
         self._messageContent = ''
+        self._sender = ''
+        self._recipient = ''
+        self._subject = ''
 
     def getSender(self):
-        return email.utils.parseaddr(self._mime['from'])[1]
+        self._sender += email.utils.parseaddr(self._mime['from'])[1]
+        return self._sender
 
     def getRecipient(self):
-        return email.utils.parseaddr(self._mime['to'])[1]
-    
+        self._recipient += email.utils.parseaddr(self._mime['to'])[1]
+        return self._recipient
+
     def getSubject(self):
-        return self._mime['subject']
+        self._subject += self._mime['subject']
+        return self._subject
 
     def getBody(self):
         if self._mime.is_multipart():
@@ -30,6 +38,4 @@ class mailParser(object):
                 .replace('=', '')
         return self._messageContent
     
-    def checkFor(self, s):
-        continue
 
