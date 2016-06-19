@@ -25,8 +25,8 @@ class mailParser(object):
             for part in self._mime.get_payload():
                 if part.get_filename() != '':
                     self._messageContent += part.get_payload(decode=True)
-                if part.get_content_type() == 'text/plain':
-                    self._messageContent += str(part.get_payload())
+                elif part.get_content_type() == 'text/plain':
+                    self._messageContent += str(part.get_payload(decode=True))
         else:
             if self._mime.get_filename() != '':
                 self._messageContent += self._mime.get_payload(decode=True)
