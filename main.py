@@ -5,7 +5,7 @@ from dbInterface import dbInterface
 from mailCreater import mailCreater
 from logger import logger
 
-import sys, traceback
+import sys, traceback, os
 from datetime import datetime
 
 
@@ -15,7 +15,8 @@ def main():
     unsubscribeText = 'You have been successfully removed from updates.'
     subscribeKeywords = ['subscribe']
     unsubscribeKeywords = ['unsubscribe', 'stop']
-    db = dbInterface('/home/tshows/scripts/t4c-email/smsmail.db')
+    localPath = os.path.dirname(os.path.realpath(__file__))
+    db = dbInterface(localPath + '/smsmail.db')
     msg = mailParser(sys.stdin.read())
     if (msg.getSender() == sender):
         return
@@ -54,7 +55,7 @@ try:
     main()
     #sys.exit(1)
 except:
-    fname = "/home/tshows/scripts/t4c-email/logs/" + str(datetime.now()) + '.txt'
+    fname = localPath + '/logs/' + str(datetime.now()) + '.txt'
     sep = '##########################################################\n'
     with open(fname, 'w+') as file:
         file.write(traceback.format_exc())
