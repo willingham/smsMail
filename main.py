@@ -5,23 +5,26 @@ from dbInterface import dbInterface
 from mailCreater import mailCreater
 from logger import logger
 
-import sys
+import sys, traceback
 from datetime import datetime
 
 
 def main():
-    sender = 'txt@t4c.tshows.us'
+    sender = 'text@t4c.tshows.us'
     subscribeText = 'You have been successfully subscribed.'
-    unsubscribeText = 'You have been successfully subscribed'
+    unsubscribeText = 'You have been successfully removed from updates.'
     subscribeKeywords = ['subscribe']
     unsubscribeKeywords = ['unsubscribe', 'stop']
-    db = dbInterface('smsmail.db')
+    db = dbInterface('/home/tshows/scripts/t4c-email/smsmail.db')
     msg = mailParser(sys.stdin.read())
+    if (msg.getSender() == sender):
+        return
 
-    if db.isSender(msg.getSender()):
+    elif db.isSender(msg.getSender()):
         newMsg = mailCreater()
         newMsg.setSender(sender)
-        newMsg.setBody(msg.getBody())
+        signature = '  -' + db.getFirstName(msg.getSender())[0] + '.' + db.getLastName(msg.getSender())
+        newMsg.setBody(msg.getBody() + signature)
         
         recipients = ''
         for item in db.getAllSubscribers():
@@ -31,20 +34,31 @@ def main():
         newMsg.setRecipients(recipients)
         newMsg.sendAllBcc()
 
-    elif any(x in msg.getBody().lower() for x in subscribeKeywords()):
+    elif any(x in msg.getBody().lower() for x in unsubscribeKeywords):
+        db.removeSubscriber(msg.getSender())
+        newMsg = mailCreater()
+	newMsg.setSender(sender)
+        newMsg.setBody(unsubscribeText)
+        newMsg.setRecipient(msg.getSender())
+        newMsg.sendOne()
+
+    elif any(x in msg.getBody().lower() for x in subscribeKeywords):
         db.addSubscriber(msg.getSender())
         newMsg = mailCreater()
         newMsg.setSender(sender)
-        newMsg.setBody(welcomeText)
+        newMsg.setBody(subscribeText)
         newMsg.setRecipient(msg.getSender())
         newMsg.sendOne()
    
-    elif any(x in msg.getBody().lower() for x in unsubscribeKeywords()):
-        db.removeSubscriber(msg.getSender())
-        newMsg.setSender(sender)
-        newMsg.setBody(unsubscribeText)
-        newMsg.setRecipient(msg.getSender())
-        newmsg.sendOne()
-
-
-main()
+try:
+    main()
+    #sys.exit(1)
+except:
+    fname = "/home/tshows/scripts/t4c-email/logs/" + str(datetime.now()) + '.txt'
+    sep = '##########################################################\n'
+    with open(fname, 'w+') as file:
+        file.write(traceback.format_exc())
+        file.write(sep)
+        file.write(sep)
+        file.write(sep)
+    #sys.exit(1)

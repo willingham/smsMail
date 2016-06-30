@@ -35,8 +35,16 @@ class dbInterface(object):
         return cur.fetchall()
 
     def isSender(self, address):
-        cur = self.query('SELECT address FROM User WHERE address="%s"' % address)
+        cur = self.query('SELECT address FROM User WHERE isSender=1 AND address="%s"' % address)
         if len(cur.fetchall()) > 0:
             return True
         else:
             return False
+
+    def getFirstName(self, address):
+	cur = self.query('SELECT FirstName FROM User WHERE address="%s"' % address)
+        return cur.fetchall()[0][0]
+
+    def getLastName(self, address):
+	cur = self.query('SELECT LastName FROM User WHERE address="%s"' % address)
+        return cur.fetchall()[0][0]
