@@ -1,4 +1,4 @@
-import os
+import subprocess
 
 class mailCreater(object):
     def __init__(self):
@@ -20,8 +20,9 @@ class mailCreater(object):
         self._recipients = recipients
 
     def sendOne(self):
-        os.system('echo "%s" | mailx -r %s %s' % (self._body, self._sender, self._recipient))
+        command = 'echo "%s" | mailx -r %s %s' % (self._body, self._sender, self._recipient)
+        subprocess.call(command, shell=True)
 
     def sendAllBcc(self):
-        os.system('echo "%s" | mailx -r %s -b %s %s' % (self._body, self._sender, self._recipients, self._sender))
-
+        command = 'echo "%s" | mailx -r %s -b %s %s' % (self._body, self._sender, self._recipients, self._sender)
+        subprocess.call(command, shell=True)
