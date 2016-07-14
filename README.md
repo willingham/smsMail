@@ -37,7 +37,7 @@ Users are removed when they text the email address with any of a list of keyword
 5. Update the value of "isSender" to 1. 'sqlite> UPDATE User SET isSender=1 WHERE address="the-phone-number-email-address"'
 6. Add the senders first and last names to the database. 'sqlite> UPDATE User SET FirstName="the-sender's-first-name" WHERE address="the-phone-number-email-address"' 'sqlite> UPDATE User SET LastName="the-sender's-last-name" WHERE address="the-phone-number-email-address"'
 
-## Known Issues
+## Troubleshooting
 ### Mail keeps bouncing back
 Follow the instructions [here](https://blog.webhostinguk.com/latest-cpanel-email-piping-local-delivery-failure-issue/) if you are getting a "Child process of jailed_virtual_address_pipe transport returned 1 from command:" error in the email delivery logs.
 Then run 'service exim restart'
