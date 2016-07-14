@@ -10,7 +10,7 @@ from datetime import datetime
 
 
 def main():
-    sender = 'text@t4c.tshows.us'
+    sender = ''
     subscribeText = 'You have been successfully subscribed.'
     unsubscribeText = 'You have been successfully removed from updates.'
     subscribeKeywords = ['subscribe']
