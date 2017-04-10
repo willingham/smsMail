@@ -9,10 +9,26 @@ class User(db.Model):
     firstName = db.Column(db.String)
     isSender = db.Column(db.Boolean, default=False)
     isActive = db.Column(db.Boolean, default=True)
+    isAuthenticated = db.Column(db.Boolean, default=False)
     posts = db.relationship('Message', backref='author', lazy='dynamic')
 
     def __init__(self, smsEmail):
         self.smsEmail = smsEmail
+
+    @property
+    def is_authenticated(self):
+        return self.isAuthenticated
+
+    @property
+    def is_active(self):
+        return self.isActive
+
+    @property
+    def is_anonymous(self):
+        return True
+
+    def get_id(self):
+        return str(self.id)
 
     def __repr__(self):
         return '<User %r>' % self.smsEmail
