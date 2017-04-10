@@ -1,0 +1,4 @@
+Flask>=0.12
+flask-Login==0.4.0
+Flask-SQLAlchemy==2.2
+Flask-WTF
