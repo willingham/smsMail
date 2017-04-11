@@ -10,6 +10,7 @@ class User(db.Model):
     isSender = db.Column(db.Boolean, default=False)
     isActive = db.Column(db.Boolean, default=True)
     isAuthenticated = db.Column(db.Boolean, default=False)
+    password = db.Column(db.String)
     posts = db.relationship('Message', backref='author', lazy='dynamic')
 
     def __init__(self, smsEmail):
