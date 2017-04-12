@@ -1,14 +1,20 @@
 <html>
   <head>
     {% if title %}
-    <title>{{ title }} - microblog</title>
+    <title>smsMail - {{ title }}</title>
     {% else %}
-    <title>microblog</title>
+    <title>smsMail</title>
     {% endif %}
+    <link rel="stylesheet" href="static/css/smsMail.css">
   </head>
   <body>
     <div>Microblog:
-        <a href="{{ url_for('home') }}">Home</a>
+        <a href="{{ url_for('index') }}">Home</a>
+        {% if g.user.is_authenticated %}
+            | <a href="{{ url_for('logout') }}">Logout</a>
+        {% else %}
+            | <a href="{{ url_for('login') }}">Login</a>
+        {% endif %}
     </div>
     <hr>
     {% with messages = get_flashed_messages() %}

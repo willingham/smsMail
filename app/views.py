@@ -1,6 +1,6 @@
 from app import app, db, models, login_manager, bcrypt
 from flask import render_template, redirect, url_for, g
-from flask_login import login_required, login_user
+from flask_login import login_required, login_user, logout_user, current_user
 from app.forms import LoginForm
 
 
@@ -9,10 +9,17 @@ def user_loader(user_id):
     return models.User.query.get(user_id)
 
 
+@app.before_request
+def before_request():
+    g.user = current_user
+
+
 @app.route('/')
-def home():
+def index():
     users = models.User.query.all()
-    return render_template('home.html', title='Home', users=users)
+    user = g.user
+    print('current user: ', user)
+    return render_template('index.html', title='Home', user=user, users=users)
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -31,7 +38,7 @@ def login():
                 db.session.add(user)
                 db.session.commit()
                 login_user(user, remember=True)
-                return redirect(url_for('home'))
+                return redirect(url_for('index'))
     return render_template('login.html', title='Sign In', form=form)
 
 
@@ -43,4 +50,11 @@ def logout():
     db.session.add(user)
     db.session.commit()
     logout_user()
-    return render_template("logout.html")
+    return redirect(url_for("index"))
+
+
+@app.route('/users', methods=['GET'])
+@login_required
+def users():
+    users = models.User.query.all()
+    return render_template("users.html", users=users)
