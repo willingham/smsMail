@@ -13,8 +13,10 @@ class User(db.Model):
     password = db.Column(db.String)
     posts = db.relationship('Message', backref='author', lazy='dynamic')
 
-    def __init__(self, smsEmail):
+    def __init__(self, email, smsEmail, password):
+        self.email = email
         self.smsEmail = smsEmail
+        self.password = password
 
     @property
     def is_authenticated(self):

@@ -1,5 +1,7 @@
-from app import app, db, models, login_manager
-from flask import render_template, g
+from app import app, db, models, login_manager, bcrypt
+from flask import render_template, redirect, url_for, g
+from flask_login import login_required, login_user
+from app.forms import LoginForm
 
 
 @login_manager.user_loader
@@ -18,15 +20,20 @@ def login():
     print(db)
     form = LoginForm()
     if form.validate_on_submit():
-        user = models.User.query.get(form.email.data)
+        print(form.email.data)
+        print(form.password.data)
+        user = models.User.query.filter_by(email=form.email.data).first()
         if user:
+            print("user found")
             if bcrypt.check_password_hash(user.password, form.password.data):
+                print("###################33 user is authenticated.")
                 user.isAuthenticated = True
                 db.session.add(user)
                 db.session.commit()
                 login_user(user, remember=True)
-                return redirect(url_for('app.home'))
-    return render_template('login.html', form=form)
+                return redirect(url_for('home'))
+    return render_template('login.html', title='Sign In', form=form)
+
 
 @app.route('/logout', methods=['GET'])
 @login_required
