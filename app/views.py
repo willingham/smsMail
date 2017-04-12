@@ -1,5 +1,5 @@
 from app import app, db, models, login_manager, bcrypt
-from flask import render_template, redirect, url_for, g
+from flask import render_template, redirect, url_for, flash, g
 from flask_login import login_required, login_user, logout_user, current_user
 from app.forms import LoginForm
 
@@ -38,6 +38,7 @@ def login():
                 db.session.add(user)
                 db.session.commit()
                 login_user(user, remember=True)
+                flash("Login Successful!", "success")
                 return redirect(url_for('index'))
     return render_template('login.html', title='Sign In', form=form)
 

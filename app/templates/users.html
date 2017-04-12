@@ -2,26 +2,29 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Users</h1>
-    <table>
-        <tr>
-            <th>Last Name</th>
-            <th>First Name</th>
-            <th>smsEmail</th>
-            <th>Email</th>
-            <th>Can Send</th>
-            <th>Is Active</th>
-        </tr>
-        {% for user in users %}
-        <tr>
-            <td>{{ user.lastName }}</td>
-            <td>{{ user.firstName }}</td>
-            <td>{{ user.smsEmail }}</td>
-            <td>{{ user.email }}</td>
-            <td>{{ user.isSender }}</td>
-            <td>{{ user.isActive }}</td>
-        </tr>
-        {% endfor %}
+    <table class='table'>
+        <thead>
+            <tr>
+                <th>Last Name</th>
+                <th>First Name</th>
+                <th>smsEmail</th>
+                <th>Email</th>
+                <th>Can Send</th>
+                <th>Is Active</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td>{{ user.lastName }}</td>
+                <td>{{ user.firstName }}</td>
+                <td>{{ user.smsEmail }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.isSender }}</td>
+                <td>{{ user.isActive }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
     </table>
         
 {% endblock %}
