@@ -5,3 +5,4 @@ Flask-WTF
 wtforms
 Flask-OpenID
 Flask-Bcrypt
+bandwidth_sdk

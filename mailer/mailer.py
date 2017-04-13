@@ -1,6 +1,6 @@
 class Mailer:
-    def __init__(self, signature="", keys={}):
-        self._keys = keys
+    def __init__(self, signature="", providerInfo={}):
+        self._providerInfo = providerInfo 
         self._message = ""
         self._recipients = []
         self._signature = signature
