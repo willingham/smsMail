@@ -1,12 +1,11 @@
 import smtplib
-from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from mailer import Mailer
 
 
 class LocalMailer(Mailer):
-    def __init__(self, signature, sender):
-        super(LocalMailer, self).__init__(signature)
+    def __init__(self, signature="", keys={}, sender=""):
+        super(LocalMailer, self).__init__(signature, keys)
         self._sender = sender
         self._server = smtplib.SMTP('localhost')
 
@@ -21,7 +20,7 @@ class LocalMailer(Mailer):
         msg['From'] = self._sender
         msg['Bcc'] = ", ".join(self._recipients)
         try:
-            self._server.send_message(msg))
+            self._server.send_message(msg)
             return True
         except:
             return False
