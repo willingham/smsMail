@@ -58,4 +58,4 @@ def logout():
 @login_required
 def users():
     users = models.User.query.all()
-    return render_template("users.html", users=users)
+    return render_template("users.html", title='Users', users=users)
