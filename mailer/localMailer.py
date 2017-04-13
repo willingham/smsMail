@@ -4,11 +4,9 @@ from mailer import Mailer
 
 class LocalMailer(Mailer):
     def __init__(self, signature, sender):
-        super(signature)
+        super(LocalMailer, self).__init__(signature)
         self._sender = sender
         self._server = smtplib.SMTP('localhost')
-
-
     def construct(self, message):
         self._message = message
 
