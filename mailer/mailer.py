@@ -5,8 +5,9 @@ class Mailer:
         self._recipients = []
         self._signature = signature
 
-    def construct(self):
-        pass
+    def construct(self, recipients, message):
+        self._recipients = recipients
+        self._message = message
 
     def validate(self):
         pass
