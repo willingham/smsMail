@@ -1,3 +1,7 @@
 __pycache__/
 *.py[cod]
 lib/
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
